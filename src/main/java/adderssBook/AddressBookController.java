@@ -6,6 +6,8 @@ import filesSystem.FileManagerFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -75,6 +77,25 @@ public class AddressBookController {
 
     public void edit(String bookName, String phoneNo, PersonDTO personDTO) {
         addressBooks.get(bookName).editPersonInfo(phoneNo, personDTO);
+    }
+
+    public void delete(String bookName) {
+        addressBooks.remove(bookName);
+        try {
+            Files.delete(Paths.get(PATH+bookName+".json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(String bookName, String phoneNo) {
+        addressBooks.get(bookName).remove(phoneNo);
+    }
+
+    public void saveAs(String bookName,String newBookName) throws AddressBookException, IOException {
+        Files.copy(Paths.get(PATH+bookName+".json"), Paths.get(PATH+newBookName+".json"));
+        addressBooks.put(newBookName, new AddressBook(newBookName, addressBooks.get(bookName)));
+        save(newBookName);
     }
 
 }

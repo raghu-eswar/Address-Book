@@ -11,6 +11,10 @@ public class AddressBook {
         this.bookName = bookName;
         this.personsData = new LinkedHashMap<>();
     }
+    public AddressBook(String bookName, AddressBook addressBook) {
+        this.bookName = bookName;
+        this.personsData = addressBook.personsData;
+    }
 
     public void addNewPerson(PersonInfo personInfo) {
         this.personsData.put(personInfo.phoneNumber, personInfo);
@@ -18,6 +22,10 @@ public class AddressBook {
 
     public void editPersonInfo(String personPhoneNo, PersonDTO personDTO) {
         personsData.get(personPhoneNo).resetData(personDTO);
+    }
+
+    public void remove(String phoneNo) {
+        this.personsData.remove(phoneNo);
     }
 
     @Override
