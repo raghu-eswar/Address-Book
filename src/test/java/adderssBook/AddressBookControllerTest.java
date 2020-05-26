@@ -122,6 +122,17 @@ public class AddressBookControllerTest {
         }
     }
 
+    @Test
+    public void forGivenProperName_edit_ShouldModifyRecords() throws AddressBookException {
+        controller.loadAddressBook("test");
+        PersonDTO personDetails = controller.getPersonDetails("test", "9999999999");
+        personDetails.address.zip = "111111";
+        controller.edit("test", "9999999999", personDetails);
+        controller.save("test");
+        PersonDTO editedPersonDetails = controller.getPersonDetails("test", "9999999999");
+        Assert.assertEquals("111111", editedPersonDetails.address.zip);
+    }
+
 }
 
 

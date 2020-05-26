@@ -73,6 +73,10 @@ public class AddressBookController {
         return new PersonDTO(addressBooks.get(bookName).personsData.get(phoneNo));
     }
 
+    public void edit(String bookName, String phoneNo, PersonDTO personDTO) {
+        addressBooks.get(bookName).editPersonInfo(phoneNo, personDTO);
+    }
+
 }
 
 
