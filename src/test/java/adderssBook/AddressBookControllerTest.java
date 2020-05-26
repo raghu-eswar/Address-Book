@@ -111,6 +111,16 @@ public class AddressBookControllerTest {
         }
     }
 
+    @Test
+    public void forGivenBookNamePhoneNumber_getPersonDetails_ShouldReturnCorrectRecord() {
+        try {
+            controller.loadAddressBook("test");
+            PersonDTO person = controller.getPersonDetails("test", "8888888888");
+            Assert.assertEquals("8888888888", person.phoneNumber);
+        } catch (AddressBookException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

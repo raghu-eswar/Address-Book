@@ -69,6 +69,10 @@ public class AddressBookController {
         fileManager.writeIntoFile(PATH+bookName+".json", addressBooks.get(bookName));
     }
 
+    public PersonDTO getPersonDetails(String bookName, String phoneNo) {
+        return new PersonDTO(addressBooks.get(bookName).personsData.get(phoneNo));
+    }
+
 }
 
 
