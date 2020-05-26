@@ -60,6 +60,15 @@ public class AddressBookController {
         return personDTOS;
     }
 
+    public void addNewData(String bookName, String firstName, String lastName, String phoneNo,
+                           String city, String state, String zip) {
+        addressBooks.get(bookName).addNewPerson(new PersonInfo(firstName, lastName,phoneNo,new Address(city,state,zip)));
+    }
+
+    public void save(String bookName) {
+        fileManager.writeIntoFile(PATH+bookName+".json", addressBooks.get(bookName));
+    }
+
 }
 
 

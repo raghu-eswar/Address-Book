@@ -68,6 +68,50 @@ public class AddressBookControllerTest {
         }
     }
 
+    @Test
+    public void forGivenProperName_addNewDataWithSave_ShouldAddNewRecords() {
+        try {
+            controller.loadAddressBook("test");
+            List<PersonDTO> book = controller.displayBook("test");
+            controller.addNewData("test","raghu", "eswar", "7777777777", "guntur","ap","11111");
+            controller.save("test");
+            List<PersonDTO> newBook = controller.displayBook("test");
+            Assert.assertEquals(book.size()+1, newBook.size());
+        } catch (AddressBookException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void forGivenProperName_addNewDataWithOutSave_ShouldNotAddNewRecords() {
+        try {
+            controller.loadAddressBook("test");
+            List<PersonDTO> book = controller.displayBook("test");
+            controller.addNewData("test","raghu", "eswar", "7777777777", "guntur","ap","11111");
+            AddressBookController controller1 = new AddressBookController();
+            controller1.loadAddressBook("test");
+            List<PersonDTO> newBook = controller1.displayBook("test");
+            Assert.assertEquals(book.size(), newBook.size());
+        } catch (AddressBookException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void forGivenDuplicateName_addNewDataWithSave_ShouldNotAddNewRecords() {
+        try {
+            controller.loadAddressBook("test");
+            List<PersonDTO> book = controller.displayBook("test");
+            controller.addNewData("test","raghu", "eswar", "7777777777", "guntur","ap","11111");
+            controller.save("test");
+            List<PersonDTO> newBook = controller.displayBook("test");
+            Assert.assertEquals(book.size(), newBook.size());
+        } catch (AddressBookException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
 
 
