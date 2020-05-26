@@ -18,4 +18,10 @@ public class AddressBookControllerTest {
         Assert.assertFalse(status);
     }
 
+    @Test
+    public void forGivenProperName_AddressBookController_ShouldReturnNumberOfRecords() {
+       int numberOfRecords = controller.loadAddressBook("test");
+        Assert.assertEquals(0,numberOfRecords);
+    }
+
 }
