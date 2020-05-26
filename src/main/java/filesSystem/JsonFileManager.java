@@ -9,7 +9,7 @@ public class JsonFileManager implements FileManager {
     Gson gson = new Gson();
 
     @Override
-    public boolean writeInto(File file, Object object) {
+    public boolean writeIntoFile(File file, Object object) {
 
         try {
             Writer writer = new FileWriter(file);
@@ -20,6 +20,11 @@ public class JsonFileManager implements FileManager {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public boolean writeIntoFile(String path, Object object) {
+        return writeIntoFile(new File(path), object);
     }
 
     @Override

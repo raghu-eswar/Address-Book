@@ -1,32 +1,29 @@
 package adderssBook;
 
-public class PersonInfo {
+public class PersonDTO {
     String firstName;
     String lastName;
     String phoneNumber;
-    Address address;
+    AddressDTO address;
 
-    public PersonInfo(String firstName, String lastName, String phoneNumber, Address address) {
+    public PersonDTO(String firstName, String lastName, String phoneNumber, AddressDTO address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
 
+    PersonDTO(PersonInfo personInfo) {
+        this(personInfo.firstName,personInfo.lastName,personInfo.phoneNumber,new AddressDTO(personInfo.address));
+    }
+
     @Override
     public String toString() {
-        return "PersonInfo{" +
+        return "PersonDTO{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address=" + address +
                 '}';
-    }
-
-    public void resetData(PersonDTO personDTO) {
-        this.firstName = personDTO.firstName;
-        this.lastName = personDTO.lastName;
-        this.phoneNumber = personDTO.phoneNumber;
-        this.address = new Address(personDTO.address);
     }
 }

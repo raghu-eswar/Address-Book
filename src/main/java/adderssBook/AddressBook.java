@@ -12,6 +12,14 @@ public class AddressBook {
         this.personsData = new LinkedHashMap<>();
     }
 
+    public void addNewPerson(PersonInfo personInfo) {
+        this.personsData.put(personInfo.phoneNumber, personInfo);
+    }
+
+    public void editPersonInfo(String personPhoneNo, PersonDTO personDTO) {
+        personsData.get(personPhoneNo).resetData(personDTO);
+    }
+
     @Override
     public String toString() {
         return "AddressBook{" +
@@ -19,4 +27,5 @@ public class AddressBook {
                 ", personsData=" + personsData +
                 '}';
     }
+
 }

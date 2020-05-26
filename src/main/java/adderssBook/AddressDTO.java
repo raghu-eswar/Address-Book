@@ -1,23 +1,23 @@
 package adderssBook;
 
-public class Address {
+public class AddressDTO {
     String city;
     String state;
     String zip;
 
-    public Address(String city, String state, String zip) {
+    public AddressDTO(String city, String state, String zip) {
         this.city = city;
         this.state = state;
         this.zip = zip;
     }
 
-    public Address(AddressDTO address) {
+    public AddressDTO(Address address) {
         this(address.city, address.state, address.zip);
     }
 
     @Override
     public String toString() {
-        return "Address{" +
+        return "AddressDTO{" +
                 "city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zip='" + zip + '\'' +

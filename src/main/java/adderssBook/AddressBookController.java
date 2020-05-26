@@ -6,8 +6,11 @@ import filesSystem.FileManagerFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AddressBookController {
 
@@ -25,7 +28,7 @@ public class AddressBookController {
             boolean isBookCreated = newBook.createNewFile();
             if (!isBookCreated)
                 throw new AddressBookException("Existing book with name "+bookName, AddressBookException.ExceptionType.DUPLICATE_NAME);
-            fileManager.writeInto(newBook, new AddressBook(bookName));
+            fileManager.writeIntoFile(newBook, new AddressBook(bookName));
         } catch (IOException e) {
             throw new AddressBookException(e.getMessage(), AddressBookException.ExceptionType.FILE_PROBLEM);
         }
@@ -44,4 +47,28 @@ public class AddressBookController {
         }
     }
 
+    public List<PersonDTO> displayBook(String bookName) throws AddressBookException {
+        if (addressBooks == null || addressBooks.size() == 0)
+            throw new AddressBookException("no address book loaded", AddressBookException.ExceptionType.NO_DATA);
+        List<PersonDTO> personDTOS = addressBooks.get(bookName).personsData.values()
+                .stream()
+                .map(PersonDTO::new)
+                .collect(Collectors.toList());
+        Comparator<PersonDTO> comparatorWithName = Comparator.comparing(personDTO -> personDTO.firstName);
+        Comparator<PersonDTO> comparatorWithZip = comparatorWithName.thenComparing(personDTO -> personDTO.address.zip);
+        personDTOS.sort(comparatorWithZip);
+        return personDTOS;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+

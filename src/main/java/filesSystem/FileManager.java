@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public interface FileManager {
 
-    boolean writeInto(File file, Object object)throws IOException;
-
+    boolean writeIntoFile(File file, Object object)throws IOException;
+    public boolean writeIntoFile(String path, Object object);
     <E> E readFile(String path, Class<E> eClass)throws IOException;
 }
