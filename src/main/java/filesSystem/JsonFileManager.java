@@ -3,20 +3,17 @@ package filesSystem;
 import adderssBook.AddressBook;
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 
 public class JsonFileManager implements FileManager {
     Gson gson = new Gson();
 
     @Override
-    public boolean writeInto(File file, AddressBook addressBook) {
+    public boolean writeInto(File file, Object object) {
 
         try {
             Writer writer = new FileWriter(file);
-            writer.write(gson.toJson(addressBook));
+            writer.write(gson.toJson(object));
             writer.close();
             return true;
         } catch (IOException e) {
@@ -24,4 +21,20 @@ public class JsonFileManager implements FileManager {
         }
         return false;
     }
+
+    @Override
+    public <E> E readFile(String path, Class<E> eClass) {
+        try (Reader reader = new FileReader(new File(path))){
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            return gson.fromJson(bufferedReader, eClass);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
+
+
+
+
+

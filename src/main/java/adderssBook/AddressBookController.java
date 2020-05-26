@@ -10,7 +10,6 @@ public class AddressBookController {
 
     static final String PATH = "./src/main/resources/";
     FileManager fileManager;
-
     public AddressBookController() {
         this.fileManager = new FileManagerFactory().getFileManager();
     }
@@ -28,4 +27,5 @@ public class AddressBookController {
         }
         return isBookCreated;
     }
+
 }
