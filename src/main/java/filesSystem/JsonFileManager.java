@@ -23,15 +23,12 @@ public class JsonFileManager implements FileManager {
     }
 
     @Override
-    public <E> E readFile(String path, Class<E> eClass) {
-        try (Reader reader = new FileReader(new File(path))){
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            return gson.fromJson(bufferedReader, eClass);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public <E> E readFile(String path, Class<E> eClass) throws IOException{
+       Reader reader = new FileReader(new File(path));
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        return gson.fromJson(bufferedReader, eClass);
     }
+
 }
 
 
